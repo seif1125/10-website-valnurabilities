@@ -1,9 +1,16 @@
 
-// in this example we are discussing how HTMLinjection could happen as any entered data 
-user could add any html tag or script in order to misfunction your website page 
-so this issue can be solved using htmlentities  function which converts htm tags to String so it will no make effect in page as 
-it will not be rendered as html entity
-
+// in this example we are discussing how HTMLinjection could happen and how we could avoid it 
+//assume we have a shop website where products page shows products only released as the url is
+//https://insecure-website.com/products?category=Gifts' where This causes the application to make
+// a SQL query to retrieve details of the relevant products from the database:
+//SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+//The application doesn't implement any defenses against SQL injection attacks, 
+//so an attacker can construct an attack like:
+//https://insecure-website.com/products?category=Gifts'--
+//This results in the SQL query:
+//SELECT * FROM products WHERE category = 'Gifts'--' 
+//as -- will comment rest of query showing all gifts realesed and unreleased
+// this can be easily avoided by using parametrized query as following:-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,18 +19,13 @@ it will not be rendered as html entity
   <title>HTMLINJECTION</title>
 </head>
 <body>
-  <form method="get" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-   <input type="search"  name="name" ></input>  
-   <input type="submit"   ></input>  
-  <div><?php if (isset( $_GET['name'])) {
-    echo htmlentities($_GET['name']); // if an injection happened here for example user typed 
-                                      //<SCRIPT>window.location.href="https://www.youtube.com";</SCRIPT>
-                                      // the page will be always redirected to youtube page if there is no htmlentities function
-    
-  } else{
-    echo 'guest';
-  }?></div>
-</form>
+
+ <?php $con=mysql_connect('localhost','root','') or die('error in connection');
+
+    $statement = connection.prepareStatement("SELECT * FROM products WHERE category = ?");
+$statement.setString(1, input); 
+$resultSet = statement.executeQuery();      
+  ?>
 </body>
 </html>
 
