@@ -79,7 +79,17 @@
       <div class = "container form-signin">
          
          <?php
-            $msg = '';
+           
+           if(isset($_GET["logout"])&&$_GET["logout"]==$_COOKIE['sessionID']){
+            setcookie("role", "", time() -123456, "/"); 
+            setcookie("sessionID", "", time() -123456, "/"); 
+
+            header('Refresh: 2; URL = login.php');
+           }
+           
+           
+           
+           $msg = '';
             
             if (!isset($_COOKIE['role']) 
                &&(!$_COOKIE['role']=='user') ) {

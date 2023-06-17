@@ -1,5 +1,5 @@
-// function acces level control 
-// suppose that we have a login page where admin has specific username and user has other username 
-// where each has their own page once they  logged in admin to "www.website.com/admin" and user to "www.website.com/user"  
-// attacker now can guess the page redirected wether user or admin   without login or user can use admin to gain access 
-// so our solution is on login we must set  a cookie  with role to check every login with which role   
+// CROSS SITE REQUEST FORGER
+// SUPPOSE  we have a logout parameter  where any attacker
+// can send a url with ?param=logout 
+// so to prevent this attack   we will create a session id cookie 
+// as once we logout we must ensutre that id created on login is found   

@@ -89,7 +89,9 @@
                      $cookie_name = "role";
                      $cookie_value = "admin";
                      setcookie($cookie_name, $cookie_value, time() + 123456, "/"); 
-
+                     $cookie_name = "sessionID";
+                     $cookie_value =  rand(1000000, 100000000);
+                     
 
 
 
